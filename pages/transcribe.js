@@ -148,12 +148,15 @@ const Transcribe = () => {
 
 	const validate = values => {
 		const errors = {};
+		if (additionalFlags.bad_image || additionalFlags.badQuality) {
+			return errors; //No need to require json here
+		}
+
 		if (!values.sequence) {
 			errors.sequence = "This field is required";
 		} else if (!isValidJSON(values.sequence)) {
 			errors.sequence = "Invalid JSON schema, please check your sequence and try again.";
 		}
-
 		return errors;
 	};
 
